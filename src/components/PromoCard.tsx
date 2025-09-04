@@ -88,12 +88,7 @@ const PromoCard: React.FC<PromoCardProps> = ({ promo, onClick }) => {
           </div>
         </div>
 
-        <div className="flex items-center justify-between">
-          <div className="text-xs sm:text-sm">
-            <span className="text-gray-400">Código: </span>
-            <span className="font-mono font-bold text-white bg-gray-800 px-2 py-1 rounded text-xs sm:text-sm">{promo.code}</span>
-          </div>
-          
+        <div className="flex items-center justify-end">
           <ExternalLink className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400 group-hover:text-white transition-colors" />
         </div>
 
