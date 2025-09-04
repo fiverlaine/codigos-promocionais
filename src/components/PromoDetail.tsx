@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Copy, ExternalLink, CheckCircle, AlertCircle, RefreshCw } from 'lucide-react';
+import { ArrowLeft, Copy, ExternalLink, CheckCircle, AlertCircle } from 'lucide-react';
 import { PromoCode } from '../types';
-import { generatePromoCode } from '../utils/codeGenerator';
 
 interface PromoDetailProps {
   promo: PromoCode;
@@ -10,24 +9,22 @@ interface PromoDetailProps {
 
 const PromoDetail: React.FC<PromoDetailProps> = ({ promo, onBack }) => {
   const [copied, setCopied] = useState(false);
-  const [currentCode, setCurrentCode] = useState(promo.code);
-  const [isGenerating, setIsGenerating] = useState(false);
 
   const handleCopyCode = async () => {
     try {
       // Primeiro tenta usar a API moderna do clipboard
       if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(currentCode);
+        await navigator.clipboard.writeText(promo.code);
       } else {
         // Fallback para ambientes sem suporte ou com restrições
-        fallbackCopyTextToClipboard(currentCode);
+        fallbackCopyTextToClipboard(promo.code);
       }
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (error) {
       // Se a API moderna falhar, usa o método de fallback
       try {
-        fallbackCopyTextToClipboard(currentCode);
+        fallbackCopyTextToClipboard(promo.code);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
       } catch (fallbackError) {
@@ -64,16 +61,6 @@ const PromoDetail: React.FC<PromoDetailProps> = ({ promo, onBack }) => {
   const showCopyFeedback = () => {
     setCopied(true);
     setTimeout(() => setCopied(false), 3000);
-  };
-
-  const handleGenerateNewCode = async () => {
-    setIsGenerating(true);
-    // Simula um pequeno delay para melhor UX
-    await new Promise(resolve => setTimeout(resolve, 500));
-    const newCode = generatePromoCode();
-    setCurrentCode(newCode);
-    setIsGenerating(false);
-    setCopied(false); // Reset copied state
   };
 
   const handleGoToBroker = () => {
@@ -130,52 +117,28 @@ const PromoDetail: React.FC<PromoDetailProps> = ({ promo, onBack }) => {
               <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">Seu Código Promocional</h2>
               
               <div className="bg-gray-900 rounded-xl p-4 sm:p-6 mb-4 sm:mb-6 border border-gray-800">
-                <div className="flex flex-col space-y-4">
-                  <div className="flex flex-col sm:flex-row items-center justify-between space-y-3 sm:space-y-0">
-                    <span className="font-mono text-xl sm:text-2xl font-bold text-white break-all">{currentCode}</span>
-                    <div className="flex space-x-2 w-full sm:w-auto">
-                      <button
-                        onClick={handleGenerateNewCode}
-                        disabled={isGenerating}
-                        className={`flex items-center space-x-2 px-3 sm:px-4 py-2 sm:py-3 rounded-xl font-semibold transition-all duration-200 ${
-                          isGenerating 
-                            ? 'bg-gray-600 text-gray-300 cursor-not-allowed' 
-                            : 'bg-blue-600 text-white hover:bg-blue-700 transform hover:scale-105'
-                        }`}
-                      >
-                        <RefreshCw className={`h-4 w-4 sm:h-5 sm:w-5 ${isGenerating ? 'animate-spin' : ''}`} />
-                        <span className="hidden sm:inline">{isGenerating ? 'Gerando...' : 'Novo'}</span>
-                      </button>
-                      <button
-                        onClick={handleCopyCode}
-                        className={`flex items-center space-x-2 px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all duration-200 flex-1 sm:flex-none justify-center ${
-                          copied 
-                            ? 'bg-green-600 text-white' 
-                            : 'bg-green-600 text-white hover:bg-green-700 transform hover:scale-105'
-                        }`}
-                      >
-                        {copied ? (
-                          <>
-                            <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5" />
-                            <span>Copiado!</span>
-                          </>
-                        ) : (
-                          <>
-                            <Copy className="h-4 w-4 sm:h-5 sm:w-5" />
-                            <span>Copiar</span>
-                          </>
-                        )}
-                      </button>
-                    </div>
-                  </div>
-                  
-                  {promo.id === 'capital-binary-main' && (
-                    <div className="bg-blue-900/30 border border-blue-600/30 rounded-lg p-3">
-                      <p className="text-blue-200 text-xs sm:text-sm text-center">
-                        💡 <strong>Dica:</strong> Clique em "Novo" para gerar um código único a cada uso!
-                      </p>
-                    </div>
-                  )}
+                <div className="flex flex-col sm:flex-row items-center justify-between space-y-3 sm:space-y-0">
+                  <span className="font-mono text-xl sm:text-2xl font-bold text-white break-all">{promo.code}</span>
+                  <button
+                    onClick={handleCopyCode}
+                    className={`flex items-center space-x-2 px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all duration-200 w-full sm:w-auto justify-center ${
+                      copied 
+                        ? 'bg-green-600 text-white' 
+                        : 'bg-green-600 text-white hover:bg-green-700 transform hover:scale-105'
+                    }`}
+                  >
+                    {copied ? (
+                      <>
+                        <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5" />
+                        <span>Copiado!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="h-4 w-4 sm:h-5 sm:w-5" />
+                        <span>Copiar</span>
+                      </>
+                    )}
+                  </button>
                 </div>
               </div>
 
