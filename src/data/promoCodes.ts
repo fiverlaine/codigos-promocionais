@@ -25,7 +25,7 @@ export const promoCodes: PromoCode[] = [
       'No campo "Código", clique e cole o código',
       'Complete seu primeiro depósito'
     ],
-    brokerUrl: 'https://capitalbinary.com/register'
+    brokerUrl: 'https://capitalbinary.app/pt/signUp'
   },
   {
     id: 'xtb-offer',
