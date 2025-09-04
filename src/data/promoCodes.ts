@@ -1,4 +1,5 @@
 import { PromoCode } from '../types';
+import { generatePromoCode } from '../utils/codeGenerator';
 
 export const promoCodes: PromoCode[] = [
   {
@@ -7,7 +8,7 @@ export const promoCodes: PromoCode[] = [
     brokerLogo: 'https://i.postimg.cc/fWYfQbyN/logo.png',
     title: 'OFERTA EXCLUSIVA',
     bonus: 'Bônus de R$300',
-    code: 'PROMO300',
+    code: generatePromoCode(),
     verified: true,
     verifiedDate: '2025-01-06',
     available: true,
