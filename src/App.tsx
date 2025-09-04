@@ -70,7 +70,7 @@ function App() {
               </span>
             </h1>
             <p className="text-sm sm:text-xl text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto px-2">
-              As melhores ofertas para corretoras financeiras, com foco especial na Capital Binary. 
+              As melhores ofertas para corretoras financeiras. 
               Todos os códigos são testados e verificados diariamente.
             </p>
           </div>

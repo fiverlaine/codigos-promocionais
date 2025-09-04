@@ -124,6 +124,13 @@ git push origin main
 - Dica explicativa para usuários
 - Códigos são gerados instantaneamente
 
+### 🎯 Página de Apresentação (Pressel)
+- **Landing Page**: Página inicial com apresentação do produto
+- **Animação de Busca**: Simulação realista de busca de ofertas
+- **Navegação**: Transição suave entre landing e app principal
+- **Design Consistente**: Mantém tema visual e responsividade
+- **Features**: Seção destacando benefícios do serviço
+
 ## Notas Técnicas
 
 - Utilizamos `npm ci` no Netlify para builds mais consistentes
