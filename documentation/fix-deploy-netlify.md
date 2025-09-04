@@ -106,7 +106,23 @@ git push origin main
 - ✅ **Build Local**: Funcionando
 - ✅ **Dependências**: Atualizadas e seguras
 - ✅ **Configuração**: Otimizada para Netlify
-- 🟡 **Deploy Netlify**: Pendente (necessário push)
+- ✅ **Deploy Netlify**: Funcionando
+- ✅ **Geração de Códigos**: Implementada
+
+## Novas Funcionalidades Implementadas
+
+### 🎲 Sistema de Geração de Códigos Aleatórios
+- **Função**: `generatePromoCode()` - Gera códigos de 5 caracteres
+- **Caracteres**: A-Z e 0-9 para melhor legibilidade
+- **Hook**: `usePromoCode` para gerenciamento de estado
+- **UI**: Botão "Novo" para regenerar códigos na Capital Binary
+- **Segurança**: Cada código é único e gerado dinamicamente
+
+### 🔄 Interface de Regeneração
+- Botão com animação de loading durante geração
+- Feedback visual para melhor UX
+- Dica explicativa para usuários
+- Códigos são gerados instantaneamente
 
 ## Notas Técnicas
 

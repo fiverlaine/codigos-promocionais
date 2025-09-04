@@ -3,11 +3,13 @@ import Header from './components/Header';
 import PromoCard from './components/PromoCard';
 import PromoDetail from './components/PromoDetail';
 import HowItWorks from './components/HowItWorks';
+import LandingPage from './components/LandingPage';
 import { Shield, Gift, Award } from 'lucide-react';
 import { promoCodes } from './data/promoCodes';
 import { PromoCode } from './types';
 
 function App() {
+  const [showLanding, setShowLanding] = useState(true);
   const [selectedPromo, setSelectedPromo] = useState<PromoCode | null>(null);
 
   const mainOffer = promoCodes.find(promo => promo.isMainOffer);
@@ -20,6 +22,14 @@ function App() {
   const handleBackToOffers = () => {
     setSelectedPromo(null);
   };
+
+  const handleEnterApp = () => {
+    setShowLanding(false);
+  };
+
+  if (showLanding) {
+    return <LandingPage onEnterApp={handleEnterApp} />;
+  }
 
   if (selectedPromo) {
     return (
@@ -35,6 +45,19 @@ function App() {
   return (
     <div className="min-h-screen bg-black">
       <Header />
+      
+      {/* Back to Landing Button */}
+      <div className="max-w-6xl mx-auto px-4 pt-4">
+        <button
+          onClick={() => setShowLanding(true)}
+          className="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors group"
+        >
+          <svg className="h-4 w-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          <span className="text-sm">Voltar à página inicial</span>
+        </button>
+      </div>
       
       <main className="max-w-6xl mx-auto px-4">
         {/* Hero Section */}
