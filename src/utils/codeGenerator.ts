@@ -1,18 +1,28 @@
 /**
- * Gera um código promocional aleatório de 5 caracteres
- * Usa letras maiúsculas e números para melhor legibilidade
- * @returns string - Código de 5 caracteres (ex: A7B9C, X2Y4Z)
+ * Gera um código promocional fixo alternado
+ * Alterna entre REXG300 e HASB300 a cada acesso
+ * @returns string - Código fixo (REXG300 ou HASB300)
  */
 export function generatePromoCode(): string {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let result = '';
+  // Códigos fixos que alternam
+  const fixedCodes = ['REXG300', 'HASB300'];
   
-  for (let i = 0; i < 5; i++) {
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    result += characters[randomIndex];
+  // Verifica se existe um índice salvo no localStorage
+  const savedIndex = localStorage.getItem('promoCodeIndex');
+  let currentIndex = 0;
+  
+  if (savedIndex !== null) {
+    // Alterna para o próximo código
+    currentIndex = (parseInt(savedIndex) + 1) % 2;
+  } else {
+    // Primeira vez, começa com REXG300
+    currentIndex = 0;
   }
   
-  return result;
+  // Salva o índice atual no localStorage
+  localStorage.setItem('promoCodeIndex', currentIndex.toString());
+  
+  return fixedCodes[currentIndex];
 }
 
 /**
