@@ -1,28 +1,11 @@
 /**
- * Gera um código promocional fixo alternado
- * Alterna entre REXG300 e HASB300 a cada acesso
- * @returns string - Código fixo (REXG300 ou HASB300)
+ * Gera um código promocional fixo
+ * Retorna sempre o código SHIP300
+ * @returns string - Código fixo (SHIP300)
  */
 export function generatePromoCode(): string {
-  // Códigos fixos que alternam
-  const fixedCodes = ['REXG300', 'HASB300'];
-  
-  // Verifica se existe um índice salvo no localStorage
-  const savedIndex = localStorage.getItem('promoCodeIndex');
-  let currentIndex = 0;
-  
-  if (savedIndex !== null) {
-    // Alterna para o próximo código
-    currentIndex = (parseInt(savedIndex) + 1) % 2;
-  } else {
-    // Primeira vez, começa com REXG300
-    currentIndex = 0;
-  }
-  
-  // Salva o índice atual no localStorage
-  localStorage.setItem('promoCodeIndex', currentIndex.toString());
-  
-  return fixedCodes[currentIndex];
+  // Código fixo único
+  return 'SHIP300';
 }
 
 /**
